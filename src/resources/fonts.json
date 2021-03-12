@@ -1,0 +1,17 @@
+{
+  "$schema": "../../node_modules/tabris/schema/fonts.json",
+  "button": {
+    "size": 18,
+    "weight": "bold"
+  },
+  "label": {
+    "size": 16,
+    "family": [
+      "open-sans-regular"
+    ]
+  },
+  "textField": {
+    "size": 20,
+    "weight": "medium"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "../../node_modules/tabris/schema/colors.json",
+  "primary": "#00b8d4",
+  "primaryDark": "#0088a3",
+  "primaryLight": "#62ebff",
+  "secondary": "#6200ea",
+  "background": "#ffffff",
+  "black": "#000000",
+  "white": "#ffffff",
+  "error": "#EE0000"
+}

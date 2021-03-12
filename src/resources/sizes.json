@@ -1,0 +1,22 @@
+{
+  "spacingXxxs": 2,
+  "spacingXxs": 4,
+  "spacingXs": 8,
+  "spacingS": 12,
+  "spacing": 16,
+  "spacingL": 24,
+  "spacingXl": 32,
+  "spacingXxl": 48,
+  "spacingXxxl": 72,
+  "textInputSpacing": 8,
+  "textInputGroupSpacing": 42,
+  "screenPadding": 16,
+  "textInputHeight": 56,
+  "textInputCornerRadius": 8,
+  "buttonHeight": 56,
+  "buttonCornerRadius": 8,
+  "iconSize": 24,
+  "iconSizeL": 32,
+  "iconSizeXl": 48,
+  "lineWidth": 1
+}

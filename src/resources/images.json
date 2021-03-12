@@ -1,0 +1,7 @@
+{
+  "$fallbackLanguage": "en-US",
+  "logo": {
+    "2x": "resources/images/user-avatar@2x.png",
+    "3x": "resources/images/user-avatar@3x.png"
+  }
+}

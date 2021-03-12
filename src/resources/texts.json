@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/tabris/schema/texts.json",
+  "$fallbackLanguage": "en-US",
+  "login": {
+    "en": "Login",
+    "de": "Login"
+  },
+  "lockViewLabel": {
+    "en": "Input Name",
+    "de": "Input Name"
+  },
+  "mainViewTitle": {
+    "en": "Main View",
+    "de": "Main View"
+  },
+  "mainViewLabel": {
+    "en": "Click button to navigate next",
+    "de": "Click button to navigate next"
+  },
+  "next": {
+    "en": "Next",
+    "de": "Next"
+  }
+}
