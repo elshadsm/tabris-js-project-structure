@@ -24,17 +24,17 @@ export class UserDetailsView extends CustomPage {
     for (const propertyName in data) {
       if (typeof data[propertyName] === 'object') {
         list.push(this.createSeparator());
-        list.push(this.createInfoCell(capitalize(propertyName), ''));
+        list.push(this.createInfoView(capitalize(propertyName), ''));
         list.push(...this.createContent(data[propertyName]));
       } else {
-        list.push(this.createInfoCell(propertyName, String(data[propertyName])));
+        list.push(this.createInfoView(propertyName, String(data[propertyName])));
       }
     }
     return list;
   }
 
-  private createInfoCell(label: string, info: string): InfoCell {
-    return InfoCell({
+  private createInfoView(label: string, info: string): InfoView {
+    return InfoView({
       left: sizes.spacing,
       top: [LayoutData.prev, sizes.spacing],
       right: sizes.spacing,
@@ -54,7 +54,7 @@ export class UserDetailsView extends CustomPage {
 }
 
 @component
-class _InfoCell extends Composite {
+class _InfoView extends Composite {
 
   @property @bind('#label.text') label: string;
   @property @bind('#info.text') info: string;
@@ -82,5 +82,5 @@ class _InfoCell extends Composite {
 
 }
 
-const InfoCell = asFactory(_InfoCell);
-type InfoCell = _InfoCell;
+const InfoView = asFactory(_InfoView);
+type InfoView = _InfoView;
