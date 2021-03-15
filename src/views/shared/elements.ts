@@ -1,4 +1,4 @@
-import { Attributes, Button, TextInput, TextView } from 'tabris';
+import { Attributes, Button, Composite, TextInput, TextView } from 'tabris';
 import { colors, fonts, sizes } from '@resources';
 
 export const PrimaryButton = ({ ...attr }: Attributes<Button>): Button =>
@@ -29,3 +29,17 @@ export const TextField = (attr: Attributes<TextInput>): TextInput =>
     cornerRadius: sizes.textInputCornerRadius,
     ...attr
   }, TextField);
+
+export const Message = (attr: Attributes<TextView>): TextView =>
+  TextView({
+    font: fonts.message,
+    textColor: colors.black,
+    ...attr
+  }, Message);
+
+export const Separator = (attr: Attributes<Composite>): Composite =>
+  Composite({
+    height: sizes.separatorHeight,
+    background: colors.gray,
+    ...attr
+  }, Separator);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Page, Attributes } from 'tabris';
 import { colors } from '@resources';
 
@@ -17,3 +18,5 @@ export abstract class CustomPage extends Page {
   }
 
 }
+
+export type PageArgs = any[];

@@ -18,5 +18,6 @@
   "iconSize": 24,
   "iconSizeL": 32,
   "iconSizeXl": 48,
-  "lineWidth": 1
+  "listTwoLineItemHeight": 72,
+  "separatorHeight": 1
 }

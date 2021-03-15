@@ -10,9 +10,9 @@ export class User implements Model {
   @prop({ nullable: true }) public name: string;
   @prop({ nullable: true }) public username: string;
   @prop({ nullable: true }) public email: string;
-  @prop({ nullable: true }) public address: Address;
   @prop({ nullable: true }) public phone: string;
   @prop({ nullable: true }) public website: string;
+  @prop({ nullable: true }) public address: Address;
   @prop({ nullable: true }) public company: Company;
 
   constructor(data: ModelValues<User>) {

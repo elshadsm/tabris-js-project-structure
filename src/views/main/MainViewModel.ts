@@ -1,20 +1,22 @@
-import { injectable, inject, property } from 'tabris-decorators';
+import { injectable, inject, property, create } from 'tabris-decorators';
 import { UserRepository } from '@repositories/UserRepository';
-import { texts } from '@resources';
+import { User } from '@models/User';
+import { OpenUserDetailsView } from '@actions/OpenUserDetailsView';
 
 @injectable
 export class MainViewModel {
 
   @inject userRepository: UserRepository;
 
-  @property public label: string;
-  @property public buttonText: string;
+  @property public userList: User[];
 
   public async init() {
-    this.label = texts.mainViewLabel;
-    this.buttonText = texts.next;
     await this.userRepository.sync();
-    this.userRepository.get().forEach(item => console.log(item.toString()));
+    this.userList = this.userRepository.get();
+  }
+
+  public select(user: User) {
+    create(OpenUserDetailsView, {user}).exec();
   }
 
 }

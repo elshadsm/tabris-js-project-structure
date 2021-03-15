@@ -5,6 +5,7 @@
   "primaryLight": "#62ebff",
   "secondary": "#6200ea",
   "background": "#ffffff",
+  "gray": "#cecece",
   "black": "#000000",
   "white": "#ffffff",
   "error": "#EE0000"

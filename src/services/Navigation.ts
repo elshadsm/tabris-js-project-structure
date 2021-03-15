@@ -20,14 +20,14 @@ export class Navigation {
     background: colors.primary
   }).appendTo(contentView);
 
-  public navigateToScreen(Name: new () => Screen, ...args: any[]): void {
+  public navigateToScreen(Name: new (...args: any[]) => Screen, ...args: any[]): void {
     const newScreen = create(Name, args);
     contentView.append(newScreen);
     this.disposeCurrentScreen();
     this.currentScreen = newScreen;
   }
 
-  public navigateToPage(Name: new () => CustomPage, ...args: any[]): void {
+  public navigateToPage(Name: new (...args: any[]) => CustomPage, ...args: any[]): void {
     this.pageNavigation.append(create(Name, args));
     this.disposeCurrentScreen();
   }
