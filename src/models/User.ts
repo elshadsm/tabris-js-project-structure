@@ -1,5 +1,5 @@
 import { injectable, prop } from 'tabris-decorators';
-import { Model, ModelValues } from '.';
+import { JSONObject, Model, ModelValues } from '.';
 import { Address } from './Address';
 import { Company } from './Company';
 
@@ -19,20 +19,7 @@ export class User implements Model {
     Object.assign(this, data);
   }
 
-  toString(): string {
-    return `* User: { 
-      id: ${this.id}
-      name: ${this.name}
-      username: ${this.username}
-      email:${this.email}
-      address: ${this.address}
-      phone: ${this.phone}
-      website: ${this.website}
-      company: ${this.company}
-   }`;
-  }
-
-  public toJSON(): string {
+  public toJSON(): JSONObject {
     const {
       id,
       name,
@@ -42,16 +29,29 @@ export class User implements Model {
       phone,
       website,
       company } = this;
-    return JSON.stringify({
+    return {
       id,
       name,
       username,
       email,
-      address,
       phone,
       website,
-      company
-    });
+      address: address.toJSON(),
+      company: company.toJSON()
+    };
+  }
+
+  toString(): string {
+    return `* User: { 
+      id: ${this.id}
+      name: ${this.name}
+      username: ${this.username}
+      email:${this.email}
+      phone: ${this.phone}
+      website: ${this.website}
+      address: ${this.address}
+      company: ${this.company}
+   }`;
   }
 
 }

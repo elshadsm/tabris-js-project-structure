@@ -18,7 +18,7 @@ export class LockView extends Screen {
   constructor() {
     super({
       background: {
-        colorStops: [colors.secondary, colors.white],
+        colorStops: [colors.indigo900, colors.indigo50],
         direction: 315
       }
     });

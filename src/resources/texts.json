@@ -13,13 +13,13 @@
     "en": "Main View",
     "de": "Main View"
   },
-  "loading": {
-    "en": "Loading...",
-    "de": "Loading..."
-  },
   "mainViewNoUserDataMessage": {
     "en": "No user data is available.",
     "de": "No user data is available."
+  },
+  "loading": {
+    "en": "Loading...",
+    "de": "Loading..."
   },
   "next": {
     "en": "Next",

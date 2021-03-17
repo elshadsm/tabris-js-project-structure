@@ -2,18 +2,12 @@
 import { shared } from 'tabris-decorators';
 
 const REQUEST_TIMEOUT = 10 * 1000;
-const DEFAULT_REQUEST_OPTIONS: RequestOptions = {
-  url: '',
-  headers: {},
-  requestTimeout: REQUEST_TIMEOUT,
-  responseType: 'json'
-};
 
 @shared
 export default class Request {
 
   public async get(options: RequestOptions): Promise<any> {
-    const { url, headers, requestTimeout, responseType } = Object.assign({}, DEFAULT_REQUEST_OPTIONS, options);
+    const { url, headers, requestTimeout, responseType } = this.checkRequestOptions(options);
     const init = { method: 'GET', headers };
     try {
       const response = await this.fetchWithTimeout(url, init, requestTimeout);
@@ -26,7 +20,7 @@ export default class Request {
   }
 
   public async post(options: RequestOptions) {
-    const { url, body, headers, requestTimeout, responseType } = Object.assign({}, DEFAULT_REQUEST_OPTIONS, options);
+    const { url, body, headers, requestTimeout, responseType } = this.checkRequestOptions(options);
     const init = {
       method: 'POST',
       headers,
@@ -40,6 +34,16 @@ export default class Request {
       this.handleFetchError(error, url);
     }
     return null;
+  }
+
+  private checkRequestOptions(options: RequestOptions): RequestOptions {
+    return {
+      url: options.url || '',
+      body: options.body || {},
+      headers: options.headers || {},
+      requestTimeout: options.requestTimeout || REQUEST_TIMEOUT,
+      responseType: options.responseType || 'json'
+    };
   }
 
   private async fetchWithTimeout(url: string, init: RequestInit, requestTimeout = REQUEST_TIMEOUT) {

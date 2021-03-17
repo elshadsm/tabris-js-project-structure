@@ -1,5 +1,5 @@
 import { injectable, prop } from 'tabris-decorators';
-import { Model, ModelValues } from '.';
+import { JSONObject, Model, ModelValues } from '.';
 
 @injectable
 export class Company implements Model {
@@ -12,24 +12,17 @@ export class Company implements Model {
     Object.assign(this, data);
   }
 
+  public toJSON(): JSONObject {
+    const { name, catchPhrase, bs } = this;
+    return { name, catchPhrase, bs };
+  }
+
   toString(): string {
     return `* Company: { 
       name: ${this.name}
       catchPhrase: ${this.catchPhrase}
       bs: ${this.bs}
    }`;
-  }
-
-  public toJSON(): string {
-    const {
-      name,
-      catchPhrase,
-      bs } = this;
-    return JSON.stringify({
-      name,
-      catchPhrase,
-      bs
-    });
   }
 
 }

@@ -41,7 +41,8 @@ export const UserCell = (): Cell<User> =>
             width: sizes.iconSize,
             height: sizes.iconSize,
             centerY: 0,
-            image: images.open
+            image: images.open,
+            tintColor: colors.primaryDark
           })
         ]
       }),

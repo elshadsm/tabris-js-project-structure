@@ -1,5 +1,5 @@
 import { prop } from 'tabris-decorators';
-import { Model, ModelValues } from '.';
+import { JSONObject, Model, ModelValues } from '.';
 import { Geo } from './Geo';
 
 export class Address implements Model {
@@ -14,6 +14,22 @@ export class Address implements Model {
     Object.assign(this, data);
   }
 
+  public toJSON(): JSONObject {
+    const {
+      street,
+      suite,
+      city,
+      zipcode,
+      geo } = this;
+    return {
+      street,
+      suite,
+      city,
+      zipcode,
+      geo: geo.toJSON()
+    };
+  }
+
   public toString(): string {
     return `* Address: { 
       street: ${this.street}
@@ -22,22 +38,6 @@ export class Address implements Model {
       zipcode:${this.zipcode}
       geo: ${this.geo}
    }`;
-  }
-
-  public toJSON(): string {
-    const {
-      street,
-      suite,
-      city,
-      zipcode,
-      geo } = this;
-    return JSON.stringify({
-      street,
-      suite,
-      city,
-      zipcode,
-      geo
-    });
   }
 
 }

@@ -1,7 +1,7 @@
 import { injectable, inject, prop } from 'tabris-decorators';
+import { UserDetailsView } from '@views/user-details/UserDetailsView';
 import { Navigation } from '@services/Navigation';
 import { Action } from './Action';
-import { UserDetailsView } from '@views/user-details/UserDetailsView';
 import { User } from '@models/User';
 
 @injectable

@@ -3,11 +3,12 @@
   "primary": "#00b8d4",
   "primaryDark": "#0088a3",
   "primaryLight": "#62ebff",
-  "secondary": "#6200ea",
   "background": "#ffffff",
-  "gray": "#cecece",
-  "lightGray": "#ededed",
+  "error": "#EE0000",
   "black": "#000000",
   "white": "#ffffff",
-  "error": "#EE0000"
+  "gray": "#cecece",
+  "lightGray": "#ededed",
+  "indigo900": "#1a237e",
+  "indigo50": "#e8eaf6"
 }

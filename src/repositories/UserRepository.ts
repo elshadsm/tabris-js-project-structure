@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { shared, inject } from 'tabris-decorators';
+import { inject, shared } from 'tabris-decorators';
+import { arrayToString } from '@common/util';
 import { Address } from '@models/Address';
 import { Company } from '@models/Company';
 import { User } from '@models/User';
@@ -39,7 +40,8 @@ export class UserRepository {
   }
 
   private persist() {
-    localStorage.setItem(KEY_USER_DATA, JSON.stringify(this.userList));
+    localStorage.setItem(KEY_USER_DATA, arrayToString(this.userList));
+    console.log(' +++ ' + arrayToString(this.userList));
   }
 
   private mapUsers(response: any): User[] {
@@ -51,9 +53,9 @@ export class UserRepository {
       name: data.name || null,
       username: data.username || null,
       email: data.email || null,
-      address: this.mapAddress(data?.address),
       phone: data.phone || null,
       website: data.website || null,
+      address: this.mapAddress(data?.address),
       company: this.mapCompany(data.company)
     }));
   }
@@ -67,7 +69,17 @@ export class UserRepository {
       suite: data.suite || null,
       city: data.city || null,
       zipcode: data.zipcode || null,
-      geo: data.geo || null
+      geo: this.mapGeo(data.geo)
+    });
+  }
+
+  private mapGeo(data: any): Geo {
+    if (!data) {
+      return null;
+    }
+    return new Geo({
+      lat: data.lat || null,
+      lng: data.lng || null
     });
   }
 
@@ -79,16 +91,6 @@ export class UserRepository {
       name: data.name || null,
       catchPhrase: data.catchPhrase || null,
       bs: data.bs || null
-    });
-  }
-
-  private mapGeo(data: any): Geo {
-    if (!data) {
-      return null;
-    }
-    return new Geo({
-      lat: data.lat || null,
-      lng: data.lng || null
     });
   }
 
