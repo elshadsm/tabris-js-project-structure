@@ -6,16 +6,20 @@
     "de": "Login"
   },
   "lockViewLabel": {
-    "en": "Input Name",
-    "de": "Input Name"
+    "en": "Input Login",
+    "de": "Input Login"
   },
   "mainViewTitle": {
     "en": "Main View",
     "de": "Main View"
   },
-  "mainViewLabel": {
-    "en": "Click button to navigate next",
-    "de": "Click button to navigate next"
+  "loading": {
+    "en": "Loading...",
+    "de": "Loading..."
+  },
+  "mainViewNoUserDataMessage": {
+    "en": "No user data is available.",
+    "de": "No user data is available."
   },
   "next": {
     "en": "Next",

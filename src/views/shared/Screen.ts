@@ -14,7 +14,6 @@ export abstract class Screen extends Composite {
       background: colors.background,
       ...attributes
     });
-    this.model?.init();
   }
 
 }

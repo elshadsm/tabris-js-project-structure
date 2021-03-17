@@ -14,7 +14,6 @@ export abstract class CustomPage extends Page {
       background: colors.background,
       ...attributes
     });
-    this.model?.init();
   }
 
 }

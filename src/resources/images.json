@@ -1,7 +1,7 @@
 {
   "$fallbackLanguage": "en-US",
-  "logo": {
-    "2x": "resources/images/user-avatar@2x.png",
-    "3x": "resources/images/user-avatar@3x.png"
+  "open": {
+    "1x": "assets/images/open@1x.png",
+    "2x": "assets/images/open@2x.png"
   }
 }

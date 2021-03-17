@@ -1,8 +1,9 @@
-import { OpenMainView } from '@actions/OpenMainView';
 import { injectable, property, resolve } from 'tabris-decorators';
+import { OpenMainView } from '@actions/OpenMainView';
+import { ViewModel } from '@views/shared/ViewModel';
 
 @injectable
-export class LockViewModel {
+export class LockViewModel extends ViewModel {
 
   @property public input: string;
 

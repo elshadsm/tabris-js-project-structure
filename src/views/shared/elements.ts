@@ -6,7 +6,7 @@ export const PrimaryButton = ({ ...attr }: Attributes<Button>): Button =>
     height: sizes.buttonHeight,
     font: fonts.button,
     background: colors.primary,
-    textColor: colors.black,
+    textColor: colors.white,
     cornerRadius: sizes.buttonCornerRadius,
     ...attr
   }, PrimaryButton);

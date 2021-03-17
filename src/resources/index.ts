@@ -6,6 +6,7 @@ import * as fontData from './fonts.json';
 import * as textData from './texts.json';
 
 app.registerFont('open-sans-regular', 'assets/fonts/open-sans-regular.ttf');
+app.registerFont('open-sans-bold', 'assets/fonts/open-sans-bold.ttf');
 
 export const colors = ColorResources.from(colorData);
 export const fonts = FontResources.from(fontData);

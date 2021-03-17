@@ -6,6 +6,7 @@
   "secondary": "#6200ea",
   "background": "#ffffff",
   "gray": "#cecece",
+  "lightGray": "#ededed",
   "black": "#000000",
   "white": "#ffffff",
   "error": "#EE0000"

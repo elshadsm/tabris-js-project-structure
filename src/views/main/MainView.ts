@@ -1,11 +1,11 @@
 import { LayoutData } from 'tabris';
-import { injectable, component, inject, bindAll, ListView } from 'tabris-decorators';
-import { Message } from '@views/shared/elements';
+import { bindAll, component, injectable, inject, ListView } from 'tabris-decorators';
 import { MainViewModel } from './MainViewModel';
-import { CustomPage } from '@views/shared/CustomPage';
 import { sizes, texts } from '@resources';
-import { User } from '@models/User';
+import { CustomPage } from '@views/shared/CustomPage';
 import { UserCell } from './UserCell';
+import { Message } from '@views/shared/elements';
+import { User } from '@models/User';
 
 @injectable({ shared: false })
 @component
@@ -13,6 +13,7 @@ export class MainView extends CustomPage {
 
   @inject
   @bindAll({
+    message: '#message.text',
     userList: '#listView.items'
   })
   public model: MainViewModel;
@@ -26,14 +27,15 @@ export class MainView extends CustomPage {
         id: 'message',
         left: sizes.spacing,
         right: sizes.spacing,
-        centerY: 0
+        centerY: 0,
+        alignment: 'centerX'
       }),
       ListView<User>({
         id: 'listView',
         layoutData: LayoutData.stretch,
         cellHeight: sizes.listTwoLineItemHeight,
         createCell: () => UserCell(),
-        onSelect: ({item}) => this.model.select(item)
+        onSelect: ({ item }) => this.model.select(item)
       })
     );
   }

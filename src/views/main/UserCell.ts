@@ -1,8 +1,8 @@
-import { User } from '@models/User';
-import { colors, fonts, sizes } from '@resources';
-import { Separator } from '@views/shared/elements';
-import { Composite, LayoutData, Setter, TextView } from 'tabris';
+import { Composite, ImageView, LayoutData, Setter, TextView } from 'tabris';
 import { Cell, ListView } from 'tabris-decorators';
+import { colors, fonts, images, sizes } from '@resources';
+import { Separator } from '@views/shared/elements';
+import { User } from '@models/User';
 
 export const UserCell = (): Cell<User> =>
   Cell<User>({
@@ -21,17 +21,27 @@ export const UserCell = (): Cell<User> =>
         children: [
           TextView({
             id: 'name',
+            left: 0,
             top: 0,
-            stretchX: true,
+            right: ['#icon', sizes.spacingXs],
             font: fonts.listTwoLinePrimary,
             textColor: colors.black
           }),
           TextView({
             id: 'username',
+            left: 0,
             top: [LayoutData.prev, sizes.spacingXxs],
-            stretchX: true,
+            right: ['#icon', sizes.spacingXs],
             font: fonts.listTwoLineSecondary,
             textColor: colors.black
+          }),
+          ImageView({
+            id: 'icon',
+            right: 0,
+            width: sizes.iconSize,
+            height: sizes.iconSize,
+            centerY: 0,
+            image: images.open
           })
         ]
       }),
