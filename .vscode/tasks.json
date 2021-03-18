@@ -36,12 +36,18 @@
       ]
     },
     {
+      "label": "Test (file)",
+      "command": "npm",
+      "args": ["run", "test:file", "${file}"],
+      "type": "shell",
+      "group": {
+        "isDefault": true,
+        "kind": "test"
+      }
+    },
+    {
       "type": "npm",
       "script": "test",
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      },
       "problemMatcher": [
         "$eslint-stylish",
         "$tsc"

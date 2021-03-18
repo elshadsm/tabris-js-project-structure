@@ -41,7 +41,6 @@ export class UserRepository {
 
   private persist() {
     localStorage.setItem(KEY_USER_DATA, arrayToString(this.userList));
-    console.log(' +++ ' + arrayToString(this.userList));
   }
 
   private mapUsers(response: any): User[] {
