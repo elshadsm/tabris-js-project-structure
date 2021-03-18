@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { JSONValue } from '@models/index';
+import { CustomError } from '@models/CustomError';
 import { shared } from 'tabris-decorators';
 
-const REQUEST_TIMEOUT = 10 * 1000;
+const DEFAULT_REQUEST_TIMEOUT = 10 * 1000;
 
 @shared
 export default class Request {
@@ -9,31 +11,21 @@ export default class Request {
   public async get(options: RequestOptions): Promise<any> {
     const { url, headers, requestTimeout, responseType } = this.checkRequestOptions(options);
     const init = { method: 'GET', headers };
-    try {
-      const response = await this.fetchWithTimeout(url, init, requestTimeout);
-      const data = await this.parseResponse(response, responseType);
-      return this.validateResponse(data, url);
-    } catch (error) {
-      this.handleFetchError(error, url);
-    }
-    return null;
+    const response = await this.fetchWithTimeout(url, init, requestTimeout);
+    this.validateResponse(response, url);
+    return await this.parseResponse(response, responseType);
   }
 
-  public async post(options: RequestOptions) {
+  public async post(options: RequestOptions): Promise<any> {
     const { url, body, headers, requestTimeout, responseType } = this.checkRequestOptions(options);
     const init = {
       method: 'POST',
       headers,
       body: JSON.stringify(body)
     };
-    try {
-      const response = await this.fetchWithTimeout(url, init, requestTimeout);
-      const data = await this.parseResponse(response, responseType);
-      return this.validateResponse(data, url);
-    } catch (error) {
-      this.handleFetchError(error, url);
-    }
-    return null;
+    const response = await this.fetchWithTimeout(url, init, requestTimeout);
+    this.validateResponse(response, url);
+    return await this.parseResponse(response, responseType);
   }
 
   private checkRequestOptions(options: RequestOptions): RequestOptions {
@@ -41,21 +33,30 @@ export default class Request {
       url: options.url || '',
       body: options.body || {},
       headers: options.headers || {},
-      requestTimeout: options.requestTimeout || REQUEST_TIMEOUT,
+      requestTimeout: options.requestTimeout || DEFAULT_REQUEST_TIMEOUT,
       responseType: options.responseType || 'json'
     };
   }
 
-  private async fetchWithTimeout(url: string, init: RequestInit, requestTimeout = REQUEST_TIMEOUT) {
-    return requestTimeout === 0 ?
-      fetch(url, init) :
-      this.timeout(requestTimeout, fetch(url, init));
+  private async fetchWithTimeout(url: string,
+    init: RequestInit,
+    requestTimeout = DEFAULT_REQUEST_TIMEOUT): Promise<Response> {
+    try {
+      if (requestTimeout === 0) {
+        return await fetch(url, init);
+      }
+      return await this.timeout(requestTimeout, fetch(url, init));
+    } catch (error) {
+      error.type = 'network';
+      error.url = url;
+      throw error;
+    }
   }
 
-  private async timeout(millisecond: number, promise: Promise<any>) {
+  private async timeout(millisecond: number, promise: Promise<any>): Promise<Response> {
     return new Promise((_resolve, _reject) => {
       const timeoutId = setTimeout(() => {
-        const error = new Error('timeout');
+        const error = new Error('* Timeout');
         _reject(error);
       }, millisecond);
       promise.then(
@@ -71,53 +72,46 @@ export default class Request {
     });
   }
 
-  private handleFetchError(cause: any, url: string) {
-    const error = new Error('* Request failed');
-    throw Object.assign(error, { type: 'network', url, cause });
-  }
-
-  private async parseResponse(response: any, responseType?: 'text' | 'json') {
+  private async parseResponse(response: any, responseType?: 'text' | 'json'): Promise<JSONValue | string> {
     if (responseType === 'json') {
       return this.parseJson(response);
     }
     return this.parseText(response);
   }
 
-  private async parseJson(response: any) {
+  private async parseJson(response: any): Promise<JSONValue> {
     try {
-      const data = await response.json();
-      response.body = data;
-      return response;
+      return await response.json();
     } catch (error) {
-      console.error(`* parseJson: ${error}`);
-      response.body = null;
-      return response;
+      console.error(`* Error parseJson: ${error}`);
+      return null;
     }
   }
 
-  private async parseText(response: any) {
+  private async parseText(response: any): Promise<string> {
     try {
-      const data = await response.text();
-      response.body = data;
-      return response;
+      return await response.text();
     } catch (error) {
-      console.error(`* parseText: ${error}`);
-      response.body = null;
-      return response;
+      console.error(`* Error parseText: ${error}`);
+      return null;
     }
   }
 
-  private validateResponse(response: any, url: string) {
+  private validateResponse(response: any, url: string): void {
     if (!response.ok) {
-      const error = new Error(`* Request failed:\n* Status: ${response.status}\n* Status text: ${response.statusText}`);
-      throw Object.assign(error, { type: 'server', url, response });
+      const message = `* Request failed:\n* Status: ${response.status}\n* Status text: ${response.statusText}`;
+      throw new CustomError({
+        message,
+        type: 'server',
+        url,
+        response
+      });
     }
-    return response.body;
   }
 
 }
 
-type RequestOptions = {
+export type RequestOptions = {
   url: string;
   body?: any,
   headers?: any;
