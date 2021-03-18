@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { inject, shared } from 'tabris-decorators';
-import { arrayToString } from '@common/util';
+import { arrayToString } from '@common/converter';
 import { Address } from '@models/Address';
 import { Company } from '@models/Company';
 import { User } from '@models/User';

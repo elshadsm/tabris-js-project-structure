@@ -2,7 +2,7 @@ import { Attributes, Composite, LayoutData, ScrollView, TextView, Widget, asFact
 import { bind, component, injectable, property } from 'tabris-decorators';
 import { colors, fonts, sizes } from '@resources';
 import { CustomPage, PageArgs } from '@views/shared/CustomPage';
-import { capitalize } from '@common/util';
+import { capitalize } from '@common/converter';
 import { Separator } from '@views/shared/elements';
 
 @injectable({ shared: false })

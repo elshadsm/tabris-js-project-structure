@@ -1,8 +1,8 @@
 import { expect } from '@sandbox';
-import { arrayToString, capitalize } from '@common/util';
+import { arrayToString, capitalize } from '@common/converter';
 import { testStringifiedUsers, testUsers } from 'testData';
 
-describe('util', () => {
+describe('converter', () => {
 
   describe('capitalize', () => {
 
