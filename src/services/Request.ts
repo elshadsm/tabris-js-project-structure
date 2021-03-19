@@ -18,7 +18,7 @@ export default class Request {
   }
 
   public async post(options: RequestOptions): Promise<any> {
-    const { url, body, headers, requestTimeout, responseType } = this.checkRequestOptions(options);
+    const { url, headers, body, requestTimeout, responseType } = this.checkRequestOptions(options);
     const init = {
       method: 'POST',
       headers,
@@ -32,14 +32,15 @@ export default class Request {
   private checkRequestOptions(options: RequestOptions): RequestOptions {
     return {
       url: options.url || '',
-      body: options.body || {},
       headers: options.headers || {},
+      body: options.body || {},
       requestTimeout: options.requestTimeout || DEFAULT_REQUEST_TIMEOUT,
       responseType: options.responseType || 'json'
     };
   }
 
-  private async fetchWithTimeout(url: string,
+  private async fetchWithTimeout(
+    url: string,
     init: RequestInit,
     requestTimeout = DEFAULT_REQUEST_TIMEOUT): Promise<Response> {
     try {
@@ -54,7 +55,7 @@ export default class Request {
     }
   }
 
-  private async timeout(millisecond: number, promise: Promise<any>): Promise<Response> {
+  private async timeout(millisecond: number, promise: Promise<Response>): Promise<Response> {
     return new Promise((_resolve, _reject) => {
       const timeoutId = setTimeout(() => {
         const error = new Error(texts.timeoutError);
@@ -85,8 +86,8 @@ export default class Request {
       return await response.json();
     } catch (error) {
       console.error(texts.parseJsonError.replace('${error}', error));
-      return null;
     }
+    return null;
   }
 
   private async parseText(response: any): Promise<string> {
@@ -94,8 +95,8 @@ export default class Request {
       return await response.text();
     } catch (error) {
       console.error(texts.parseTextError.replace('${error}', error));
-      return null;
     }
+    return null;
   }
 
   private validateResponse(response: any, url: string): void {
@@ -103,11 +104,7 @@ export default class Request {
       const message = texts.serverError
         .replace('${status}', response.status)
         .replace('${statusText}', response.statusText);
-      throw new CustomError({
-        message,
-        type: 'server',
-        url
-      });
+      throw new CustomError({ message, type: 'server', url });
     }
   }
 
@@ -115,8 +112,8 @@ export default class Request {
 
 export type RequestOptions = {
   url: string;
-  body?: any,
   headers?: any;
+  body?: any,
   requestTimeout?: number;
   responseType?: 'text' | 'json'
 };

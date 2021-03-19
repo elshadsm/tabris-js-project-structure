@@ -91,13 +91,13 @@ describe('Request', () => {
     it('sets request options', async () => {
       fetchMock.mock('foo', response);
 
-      await request.post({ url: 'foo', body: 'baz', headers: { bar: 'baz' } });
+      await request.post({ url: 'foo', headers: { bar: 'baz' } , body: 'baz'});
 
       expect(fetchMock.lastUrl()).to.equal('/foo');
       const options = fetchMock.lastOptions();
       expect(options.method).to.equal('POST');
-      expect(options.body).to.equal('"baz"');
       expect(options.headers).to.deep.equal({ bar: 'baz' });
+      expect(options.body).to.equal('"baz"');
     });
 
     it('gets json response', async () => {
