@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { JSONValue } from '@models/index';
 import { CustomError } from '@models/CustomError';
+import { JSONValue } from '@models/index';
 import { shared } from 'tabris-decorators';
+import { texts } from '@resources';
 
 const DEFAULT_REQUEST_TIMEOUT = 10 * 1000;
 
@@ -56,7 +57,7 @@ export default class Request {
   private async timeout(millisecond: number, promise: Promise<any>): Promise<Response> {
     return new Promise((_resolve, _reject) => {
       const timeoutId = setTimeout(() => {
-        const error = new Error('* Timeout');
+        const error = new Error(texts.timeoutError);
         _reject(error);
       }, millisecond);
       promise.then(
@@ -83,7 +84,7 @@ export default class Request {
     try {
       return await response.json();
     } catch (error) {
-      console.error(`* Error parseJson: ${error}`);
+      console.error(texts.parseJsonError.replace('${error}', error));
       return null;
     }
   }
@@ -92,14 +93,16 @@ export default class Request {
     try {
       return await response.text();
     } catch (error) {
-      console.error(`* Error parseText: ${error}`);
+      console.error(texts.parseTextError.replace('${error}', error));
       return null;
     }
   }
 
   private validateResponse(response: any, url: string): void {
     if (!response.ok) {
-      const message = `* Request failed:\n* Status: ${response.status}\n* Status text: ${response.statusText}`;
+      const message = texts.serverError
+        .replace('${status}', response.status)
+        .replace('${statusText}', response.statusText);
       throw new CustomError({
         message,
         type: 'server',

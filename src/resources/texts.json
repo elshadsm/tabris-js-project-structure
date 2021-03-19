@@ -24,5 +24,21 @@
   "next": {
     "en": "Next",
     "de": "Next"
+  },
+  "serverError": {
+    "en": "* Request failed:\n* Status: ${status}\n* Status text: ${statusText}",
+    "de": "* Request failed:\n* Status: ${status}\n* Status text: ${statusText}"
+  },
+  "timeoutError": {
+    "en": "* Timeout",
+    "de": "* Timeout"
+  },
+  "parseJsonError": {
+    "en": "* Error parseJson: ${error}",
+    "de": "* Error parseJson: ${error}"
+  },
+  "parseTextError": {
+    "en": "* Error parseText: ${error}",
+    "de": "* Error parseText: ${error}"
   }
 }
