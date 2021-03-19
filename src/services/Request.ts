@@ -106,8 +106,7 @@ export default class Request {
       throw new CustomError({
         message,
         type: 'server',
-        url,
-        response
+        url
       });
     }
   }

@@ -16,13 +16,14 @@ describe('OpenMainView', () => {
     injector.shared(Navigation);
     injector.shared(OpenMainView);
     navigation = injector.resolve(Navigation);
-    stub(navigation, 'navigateToPage');
     openMainView = injector.resolve(OpenMainView);
   });
 
   afterEach(() => reset());
 
   it('navigates to MainView page', () => {
+    stub(navigation, 'navigateToPage');
+
     openMainView.exec();
 
     expect(navigation.navigateToPage).to.have.been.calledWith(MainView);

@@ -16,20 +16,17 @@ describe('App', () => {
     injector.shared(Navigation);
     injector.shared(App);
     navigation = injector.resolve(Navigation);
-    stub(navigation, 'navigateToScreen');
     app = injector.resolve(App);
   });
 
   afterEach(() => reset());
 
-  describe('start', () => {
+  it('start navigates to LockView screen', () => {
+    stub(navigation, 'navigateToScreen');
 
-    it('navigates to LockView screen', () => {
-      app.start();
+    app.start();
 
-      expect(navigation.navigateToScreen).to.have.been.calledWith(LockView);
-    });
-
+    expect(navigation.navigateToScreen).to.have.been.calledWith(LockView);
   });
 
 });

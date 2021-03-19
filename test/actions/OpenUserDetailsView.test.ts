@@ -16,13 +16,14 @@ describe('OpenUserDetailsView', () => {
     injector.shared(Navigation);
     injector.shared(OpenUserDetailsView);
     navigation = injector.resolve(Navigation);
-    stub(navigation, 'navigateToPage');
     openUserDetailsView = injector.resolve(OpenUserDetailsView);
   });
 
   afterEach(() => reset());
 
   it('navigates to UserDetailsView page', () => {
+    stub(navigation, 'navigateToPage');
+
     openUserDetailsView.exec();
 
     expect(navigation.navigateToPage).to.have.been.calledWith(UserDetailsView);

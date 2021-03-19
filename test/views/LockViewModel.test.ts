@@ -32,7 +32,7 @@ describe('LockViewModel', () => {
       expect(model.dispatch).to.have.been.calledWith(OpenMainView);
     });
 
-    it('does not dispatch OpenMainView action when input is not test', () => {
+    it('not dispatches OpenMainView action when input is not test', () => {
       model.input = 'foo';
       stub(model, 'dispatch');
 

@@ -4,7 +4,7 @@ import { CustomError } from '@models/CustomError';
 import * as fetchMock from 'fetch-mock';
 import Request from '@services/Request';
 
-describe('App', () => {
+describe('Request', () => {
 
   let injector: Injector;
   let request: Request;
@@ -28,12 +28,12 @@ describe('App', () => {
     it('sets request options', async () => {
       fetchMock.mock('foo', response);
 
-      await request.get({ url: 'foo' });
+      await request.get({ url: 'foo', headers: { bar: 'baz' } });
 
       expect(fetchMock.lastUrl()).to.equal('/foo');
       const options = fetchMock.lastOptions();
       expect(options.method).to.equal('GET');
-      expect(options.headers).to.deep.equal({});
+      expect(options.headers).to.deep.equal({ bar: 'baz' });
     });
 
     it('gets json response', async () => {
@@ -91,13 +91,13 @@ describe('App', () => {
     it('sets request options', async () => {
       fetchMock.mock('foo', response);
 
-      await request.post({ url: 'foo', body: 'baz' });
+      await request.post({ url: 'foo', body: 'baz', headers: { bar: 'baz' } });
 
       expect(fetchMock.lastUrl()).to.equal('/foo');
       const options = fetchMock.lastOptions();
       expect(options.method).to.equal('POST');
-      expect(options.headers).to.deep.equal({});
       expect(options.body).to.equal('"baz"');
+      expect(options.headers).to.deep.equal({ bar: 'baz' });
     });
 
     it('gets json response', async () => {

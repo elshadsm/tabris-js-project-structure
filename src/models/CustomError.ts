@@ -8,7 +8,6 @@ export class CustomError extends Error implements Model {
 
   @prop({ nullable: true }) public type: string;
   @prop({ nullable: true }) public url: string;
-  @prop({ nullable: true }) public response: any;
   @prop({ nullable: true }) public cause: string;
 
   constructor(data: Partial<CustomError>) {
@@ -17,15 +16,14 @@ export class CustomError extends Error implements Model {
   }
 
   public toJSON(): JSONObject {
-    const { message, type, response, cause } = this;
-    return { message, type, response, cause };
+    const { message, type, cause } = this;
+    return { message, type, cause };
   }
 
   toString(): string {
     return `* CustomError: { 
       message: ${this.message}
       type: ${this.type}
-      response: ${this.response}
       cause: ${this.cause}
    }`;
   }

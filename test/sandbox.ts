@@ -20,15 +20,4 @@ const init = () => {
 const flush = () => tabris.flush();
 init();
 
-export {
-  sandbox,
-  tabris,
-  ClientMock,
-  expect,
-  spy,
-  stub,
-  mock,
-  init,
-  reset,
-  flush
-};
+export { sandbox, tabris, ClientMock, expect, spy, stub, mock, init, reset, flush };
