@@ -1,4 +1,4 @@
-import { create, injectable, inject, property } from 'tabris-decorators';
+import { injectable, inject, property } from 'tabris-decorators';
 import { OpenUserDetailsView } from '@actions/OpenUserDetailsView';
 import { UserRepository } from '@repositories/UserRepository';
 import { ViewModel } from '@views/shared/ViewModel';
@@ -22,7 +22,7 @@ export class MainViewModel extends ViewModel {
   }
 
   public select(user: User) {
-    create(OpenUserDetailsView, { user }).exec();
+    this.dispatch(OpenUserDetailsView, { user });
   }
 
 }

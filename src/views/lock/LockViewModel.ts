@@ -1,4 +1,4 @@
-import { injectable, property, resolve } from 'tabris-decorators';
+import { injectable, property } from 'tabris-decorators';
 import { OpenMainView } from '@actions/OpenMainView';
 import { ViewModel } from '@views/shared/ViewModel';
 
@@ -13,7 +13,7 @@ export class LockViewModel extends ViewModel {
 
   public login(): void {
     if (this.input === 'test') {
-      resolve(OpenMainView).exec();
+      this.dispatch(OpenMainView);
     }
   }
 
