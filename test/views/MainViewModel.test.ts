@@ -1,5 +1,6 @@
 import { expect, init, reset, stub } from '@sandbox';
 import { Injector } from 'tabris-decorators';
+import { OpenUserDetailsView } from '@actions/OpenUserDetailsView';
 import { UserRepository } from '@repositories/UserRepository';
 import { MainViewModel } from '@views/main/MainViewModel';
 import { testUsers } from 'testData';
@@ -28,7 +29,7 @@ describe('MainViewModel', () => {
 
   describe('init', () => {
 
-    it('renders loading message', async () => {
+    it('renders loading message', () => {
       expect(model.message).to.equal('Loading...');
     });
 
@@ -44,6 +45,19 @@ describe('MainViewModel', () => {
 
       expect(model.userList.length).to.equal(0);
       expect(model.message).to.equal('No user data is available.');
+    });
+
+  });
+
+  // mocha runs tests in the order of the description definition.
+  describe('select', () => {
+
+    it('dispatches OpenUserDetailsView action', () => {
+      stub(model, 'dispatch');
+
+      model.select(testUsers[0]);
+
+      expect(model.dispatch).to.have.been.calledWith(OpenUserDetailsView, { user: testUsers[0] });
     });
 
   });
