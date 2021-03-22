@@ -7,7 +7,7 @@ export class App {
 
   @inject navigation: Navigation
 
-  public start() {
+  public start(): void {
     this.navigation.navigateToScreen(LockView);
   }
 

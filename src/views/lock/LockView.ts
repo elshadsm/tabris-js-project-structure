@@ -33,7 +33,6 @@ export class LockView extends Screen {
         background: colors.white,
         children: [
           Label({
-            id: 'label',
             bottom: [LayoutData.next, sizes.spacing],
             layoutData: LayoutData.stretchX,
             text: texts.lockViewLabel
@@ -44,7 +43,6 @@ export class LockView extends Screen {
             layoutData: LayoutData.stretchX
           }),
           PrimaryButton({
-            id: 'button',
             bottom: 0,
             layoutData: LayoutData.stretchX,
             text: texts.login,

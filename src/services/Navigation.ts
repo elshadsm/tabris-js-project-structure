@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NavigationView, contentView, LayoutData } from 'tabris';
 import { create } from 'tabris-decorators';
 import { CustomPage } from '@views/shared/CustomPage';

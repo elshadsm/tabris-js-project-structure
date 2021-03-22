@@ -7,7 +7,7 @@ export function capitalize(value: string): string {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-export function arrayToString<T extends Model>(array: T[]) {
+export function arrayToString<T extends Model>(array: T[]): string {
   if (!array) {
     return '';
   }

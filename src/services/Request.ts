@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { CustomError } from '@models/CustomError';
 import { JSONValue } from '@models/index';
 import { shared } from 'tabris-decorators';

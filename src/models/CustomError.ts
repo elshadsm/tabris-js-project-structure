@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { injectable, prop } from 'tabris-decorators';
 import { JSONObject, Model } from '.';
 

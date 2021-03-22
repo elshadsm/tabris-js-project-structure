@@ -38,9 +38,9 @@ export const UserCell = (): Cell<User> =>
           ImageView({
             id: 'icon',
             right: 0,
+            centerY: 0,
             width: sizes.iconSize,
             height: sizes.iconSize,
-            centerY: 0,
             image: images.open,
             tintColor: colors.primaryDark
           })

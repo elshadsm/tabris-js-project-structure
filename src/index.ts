@@ -1,6 +1,6 @@
-import { Module } from 'tabris';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+import { Module } from 'tabris';
 const paths = (Module.readJSON('./tsconfig.json') as any).compilerOptions.paths;
 Module.addPath({ baseUrl: '/dist', paths });
 

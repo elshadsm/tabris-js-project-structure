@@ -62,7 +62,7 @@ describe('MainViewModel', () => {
 
   });
 
-  function stubUserRepository() {
+  function stubUserRepository(): void {
     const users = currentTestIndex === 1 ? testUsers : [];
     if (currentTestIndex > 0) {
       stub(userRepository, 'sync');

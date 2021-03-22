@@ -13,7 +13,7 @@ export class MainViewModel extends ViewModel {
   @property public message: string;
   @property public userList: User[];
 
-  public async init() {
+  public async init(): Promise<void> {
     this.message = texts.loading;
     await this.userRepository.sync();
     const list = this.userRepository.get();
@@ -21,7 +21,7 @@ export class MainViewModel extends ViewModel {
     this.message = list.length ? '' : texts.mainViewNoUserDataMessage;
   }
 
-  public select(user: User) {
+  public select(user: User): void {
     this.dispatch(OpenUserDetailsView, { user });
   }
 

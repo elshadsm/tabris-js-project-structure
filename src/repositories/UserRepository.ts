@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { inject, shared } from 'tabris-decorators';
 import { arrayToString } from '@common/converter';
 import { Address } from '@models/Address';
@@ -39,7 +40,7 @@ export class UserRepository {
     return data ? JSON.parse(data) : [];
   }
 
-  private persist() {
+  private persist(): void {
     localStorage.setItem(KEY_USER_DATA, arrayToString(this.userList));
   }
 

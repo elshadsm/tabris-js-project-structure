@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Composite, Attributes, LayoutData } from 'tabris';
 import { colors } from '@resources';
 
