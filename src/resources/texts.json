@@ -25,6 +25,18 @@
     "en": "Next",
     "de": "Next"
   },
+  "address": {
+    "en": "Address",
+    "de": "Address"
+  },
+  "company": {
+    "en": "Company",
+    "de": "Company"
+  },
+  "geo": {
+    "en": "Geo",
+    "de": "Geo"
+  },
   "serverError": {
     "en": "* Request failed:\n* Status: ${status}\n* Status text: ${statusText}",
     "de": "* Request failed:\n* Status: ${status}\n* Status text: ${statusText}"

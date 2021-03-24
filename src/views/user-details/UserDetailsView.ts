@@ -1,9 +1,9 @@
 import { Composite, LayoutData, Properties, ScrollView, TextView, Widget } from 'tabris';
 import { bind, component, property, shared } from 'tabris-decorators';
-import { CustomPage, PageArgs } from '@views/shared/CustomPage';
-import { colors, fonts, sizes } from '@resources';
-import { capitalize } from '@common/converter';
+import { colors, fonts, sizes, texts } from '@resources';
+import { CustomPage } from '@views/shared/CustomPage';
 import { Separator } from '@views/shared/elements';
+import { Model } from '@models/index';
 import { User } from '@models/User';
 
 @shared
@@ -12,49 +12,77 @@ export class UserDetailsView extends CustomPage {
 
   @property user: User;
 
-  constructor(args: PageArgs<UserDetailsView>) {
+  constructor(properties: Properties<UserDetailsView>) {
     super({
-      title: args.user.name,
-      ...args
+      title: properties.user.name,
+      ...properties
     });
     this.append(
       ScrollView({
         layoutData: LayoutData.stretch,
-        children: this.createContent(this.user)
+        children: [
+          ...this.createInfoUi(this.user),
+          Separator({
+            left: sizes.spacing,
+            top: [LayoutData.prev, sizes.spacing],
+            right: sizes.spacing
+          }),
+          new InfoView({
+            left: sizes.spacing,
+            top: [LayoutData.prev, sizes.spacing],
+            right: sizes.spacing,
+            label: texts.address,
+            info: ''
+          }),
+          ...this.createInfoUi(this.user.address),
+          Separator({
+            left: sizes.spacing,
+            top: [LayoutData.prev, sizes.spacing],
+            right: sizes.spacing
+          }),
+          new InfoView({
+            left: sizes.spacing,
+            top: [LayoutData.prev, sizes.spacing],
+            right: sizes.spacing,
+            label: texts.geo,
+            info: ''
+          }),
+          ...this.createInfoUi(this.user.address.geo),
+          Separator({
+            left: sizes.spacing,
+            top: [LayoutData.prev, sizes.spacing],
+            right: sizes.spacing
+          }),
+          new InfoView({
+            left: sizes.spacing,
+            top: [LayoutData.prev, sizes.spacing],
+            right: sizes.spacing,
+            label: texts.company,
+            info: ''
+          }),
+          ...this.createInfoUi(this.user.company)
+        ]
       })
     );
   }
 
-  private createContent<T>(data: T): Widget[] {
+  private createInfoUi(model: Model): Widget[] {
     const list: Widget[] = [];
-    for (const propertyName in data) {
-      if (typeof data[propertyName] === 'object') {
-        list.push(this.createSeparator());
-        list.push(this.createInfoView(capitalize(propertyName), ''));
-        list.push(...this.createContent(data[propertyName]));
-      } else {
-        list.push(this.createInfoView(propertyName, String(data[propertyName])));
+    for (const propertyName in model) {
+      const key = propertyName as keyof Model;
+      const value = model[key];
+      if (typeof value !== 'object') {
+        list.push(
+          new InfoView({
+            left: sizes.spacing,
+            top: [LayoutData.prev, sizes.spacing],
+            right: sizes.spacing,
+            label: key,
+            info: String(value)
+          }));
       }
     }
     return list;
-  }
-
-  private createInfoView(label: string, info: string): InfoView {
-    return new InfoView({
-      left: sizes.spacing,
-      top: [LayoutData.prev, sizes.spacing],
-      right: sizes.spacing,
-      label,
-      info
-    });
-  }
-
-  private createSeparator(): Composite {
-    return Separator({
-      left: sizes.spacing,
-      top: [LayoutData.prev, sizes.spacing],
-      right: sizes.spacing
-    });
   }
 
 }

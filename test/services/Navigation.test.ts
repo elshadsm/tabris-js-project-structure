@@ -1,10 +1,10 @@
 import { expect, init, reset } from '@sandbox';
-import { contentView, NavigationView } from 'tabris';
-import { Injector } from 'tabris-decorators';
-import { CustomPage, PageArgs } from '@views/shared/CustomPage';
-import { Screen, ScreenArgs } from '@views/shared/Screen';
+import { contentView, NavigationView, Properties } from 'tabris';
+import { Injector, property } from 'tabris-decorators';
+import { CustomPage } from '@views/shared/CustomPage';
 import { Navigation } from '@services/Navigation';
 import { testUsers } from 'testData';
+import { Screen } from '@views/shared/Screen';
 import { User } from '@models/User';
 
 describe('Navigation', () => {
@@ -26,7 +26,7 @@ describe('Navigation', () => {
     it('navigates to TestScreen', () => {
       const user = testUsers[0];
 
-      navigation.navigateToScreen(TestScreen, user, 'foo');
+      navigation.navigateToScreen(TestScreen, { user, id: 'foo' });
 
       const screen = contentView.children().last() as TestScreen;
       expect(screen.user).to.deep.equal(user);
@@ -36,8 +36,8 @@ describe('Navigation', () => {
     it('disposes current screen', () => {
       const user = testUsers[0];
 
-      navigation.navigateToScreen(TestScreen, user, 'foo');
-      navigation.navigateToScreen(TestScreen, user, 'bar');
+      navigation.navigateToScreen(TestScreen, { user, id: 'foo' });
+      navigation.navigateToScreen(TestScreen, { user, id: 'bar' });
 
       const currentScreen = contentView.find('#foo').first() as TestScreen;
       const newScreen = contentView.find('#bar').first() as TestScreen;
@@ -52,7 +52,7 @@ describe('Navigation', () => {
     it('navigates to TestPage', () => {
       const user = testUsers[0];
 
-      navigation.navigateToPage(TestPage, user, 'foo');
+      navigation.navigateToPage(TestPage, { user, id: 'foo' });
 
       const navigationView = contentView.find(NavigationView).first();
       const page = navigationView.pages().last() as TestPage;
@@ -63,8 +63,8 @@ describe('Navigation', () => {
     it('keeps current page', () => {
       const user = testUsers[0];
 
-      navigation.navigateToPage(TestPage, user, 'foo');
-      navigation.navigateToPage(TestPage, user, 'bar');
+      navigation.navigateToPage(TestPage, { user, id: 'foo' });
+      navigation.navigateToPage(TestPage, { user, id: 'bar' });
 
       const navigationView = contentView.find(NavigationView).first();
       const currentPage = navigationView.find('#foo').first() as TestPage;
@@ -76,8 +76,8 @@ describe('Navigation', () => {
     it('disposes current screen', () => {
       const user = testUsers[0];
 
-      navigation.navigateToScreen(TestScreen, user, 'foo');
-      navigation.navigateToPage(TestPage, user, 'bar');
+      navigation.navigateToScreen(TestScreen, { user, id: 'foo' });
+      navigation.navigateToPage(TestPage, { user, id: 'bar' });
 
       const navigationView = contentView.find(NavigationView).first();
       const currentScreen = contentView.find('#foo').first() as TestScreen;
@@ -92,22 +92,20 @@ describe('Navigation', () => {
 
 class TestScreen extends Screen {
 
-  user: User;
+  @property user: User;
 
-  constructor([user, id]: ScreenArgs) {
-    super({ id })
-    this.user = user;
+  constructor(properties: Properties<TestScreen>) {
+    super(properties);
   }
 
 }
 
 class TestPage extends CustomPage {
 
-  user: User;
+  @property user: User;
 
-  constructor([user, id]: PageArgs) {
-    super({ id })
-    this.user = user;
+  constructor(properties: Properties<TestScreen>) {
+    super(properties);
   }
 
 }

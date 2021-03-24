@@ -14,5 +14,3 @@ export abstract class CustomPage extends Page {
   }
 
 }
-
-export type PageArgs<T extends CustomPage> = Partial<Properties<T>>;
