@@ -3,6 +3,7 @@ import { Injector } from 'tabris-decorators';
 import { OpenUserDetailsView } from '@actions/OpenUserDetailsView';
 import { UserDetailsView } from '@views/user-details/UserDetailsView';
 import { Navigation } from '@services/Navigation';
+import { testUsers } from 'testData';
 
 describe('OpenUserDetailsView', () => {
 
@@ -24,7 +25,7 @@ describe('OpenUserDetailsView', () => {
   it('navigates to UserDetailsView page', () => {
     stub(navigation, 'navigateToPage');
 
-    openUserDetailsView.exec();
+    openUserDetailsView.exec(testUsers[0]);
 
     expect(navigation.navigateToPage).to.have.been.calledWith(UserDetailsView);
   });

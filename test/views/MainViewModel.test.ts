@@ -3,6 +3,7 @@ import { Injector } from 'tabris-decorators';
 import { OpenUserDetailsView } from '@actions/OpenUserDetailsView';
 import { UserRepository } from '@repositories/UserRepository';
 import { MainViewModel } from '@views/main/MainViewModel';
+import { Navigation } from '@services/Navigation';
 import { testUsers } from 'testData';
 import { wait } from 'shared';
 import Request from '@services/Request';
@@ -52,12 +53,15 @@ describe('MainViewModel', () => {
   // mocha runs tests in the order of the description definition.
   describe('select', () => {
 
-    it('dispatches OpenUserDetailsView action', () => {
-      stub(model, 'dispatch');
+    it('executes OpenUserDetailsView action', () => {
+      injector.shared(Navigation);
+      const openUserDetailsView = new OpenUserDetailsView();
+      injector.register(OpenUserDetailsView, openUserDetailsView);
+      const exec = stub(openUserDetailsView, 'exec');
 
       model.select(testUsers[0]);
 
-      expect(model.dispatch).to.have.been.calledWith(OpenUserDetailsView, { user: testUsers[0] });
+      expect(exec).to.have.been.calledWith(testUsers[0]);
     });
 
   });

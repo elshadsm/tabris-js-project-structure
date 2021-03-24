@@ -2,17 +2,24 @@ import { expect, init, reset, stub } from '@sandbox';
 import { Injector } from 'tabris-decorators';
 import { LockViewModel } from '@views/lock/LockViewModel';
 import { OpenMainView } from '@actions/OpenMainView';
+import { Navigation } from '@services/Navigation';
+import { SinonStub } from 'sinon';
 
 describe('LockViewModel', () => {
 
   let injector: Injector;
   let model: LockViewModel;
+  let exec: SinonStub;
 
   beforeEach(() => {
     init();
     injector = new Injector();
     injector.injectable(LockViewModel);
+    injector.shared(Navigation);
     model = injector.resolve(LockViewModel);
+    const openMainView = new OpenMainView();
+    injector.register(OpenMainView, openMainView);
+    exec = stub(openMainView, 'exec');
   });
 
   afterEach(() => reset());
@@ -23,22 +30,20 @@ describe('LockViewModel', () => {
 
   describe('login', () => {
 
-    it('dispatches OpenMainView action when input is test', () => {
+    it('executes OpenMainView action when input is test', () => {
       model.input = 'test';
-      stub(model, 'dispatch');
 
       model.login();
 
-      expect(model.dispatch).to.have.been.calledWith(OpenMainView);
+      expect(exec).to.have.been.called;
     });
 
-    it('not dispatches OpenMainView action when input is not test', () => {
+    it('not executes OpenMainView action when input is not test', () => {
       model.input = 'foo';
-      stub(model, 'dispatch');
 
       model.login();
 
-      expect(model.dispatch).not.to.have.been.calledWith(OpenMainView);
+      expect(exec).not.to.have.been.called;
     });
 
   });
