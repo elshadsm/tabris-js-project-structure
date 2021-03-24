@@ -1,20 +1,26 @@
-import { Attributes, Composite, LayoutData, ScrollView, TextView, Widget, asFactory } from 'tabris';
-import { bind, component, injectable, property } from 'tabris-decorators';
-import { colors, fonts, sizes } from '@resources';
+import { Composite, LayoutData, Properties, ScrollView, TextView, Widget } from 'tabris';
+import { bind, component, property, shared } from 'tabris-decorators';
 import { CustomPage, PageArgs } from '@views/shared/CustomPage';
+import { colors, fonts, sizes } from '@resources';
 import { capitalize } from '@common/converter';
 import { Separator } from '@views/shared/elements';
+import { User } from '@models/User';
 
-@injectable({ shared: false })
+@shared
 @component
 export class UserDetailsView extends CustomPage {
 
-  constructor([user]: PageArgs) {
-    super({ title: user.name });
+  @property user: User;
+
+  constructor(args: PageArgs<UserDetailsView>) {
+    super({
+      title: args.user.name,
+      ...args
+    });
     this.append(
       ScrollView({
         layoutData: LayoutData.stretch,
-        children: this.createContent(user)
+        children: this.createContent(this.user)
       })
     );
   }
@@ -34,7 +40,7 @@ export class UserDetailsView extends CustomPage {
   }
 
   private createInfoView(label: string, info: string): InfoView {
-    return InfoView({
+    return new InfoView({
       left: sizes.spacing,
       top: [LayoutData.prev, sizes.spacing],
       right: sizes.spacing,
@@ -54,13 +60,13 @@ export class UserDetailsView extends CustomPage {
 }
 
 @component
-class _InfoView extends Composite {
+class InfoView extends Composite {
 
-  @property @bind('#label.text') label: string;
-  @property @bind('#info.text') info: string;
+  @bind('#label.text') label: string;
+  @bind('#info.text') info: string;
 
-  constructor(attributes: Attributes<Composite>) {
-    super(attributes);
+  constructor(properties: Properties<InfoView>) {
+    super(properties);
     this.append(
       TextView({
         id: 'label',
@@ -81,6 +87,3 @@ class _InfoView extends Composite {
   }
 
 }
-
-const InfoView = asFactory(_InfoView);
-type InfoView = _InfoView;

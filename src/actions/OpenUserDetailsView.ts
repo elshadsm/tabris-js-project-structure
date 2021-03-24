@@ -1,4 +1,4 @@
-import { injectable, inject, prop } from 'tabris-decorators';
+import { injectable, inject } from 'tabris-decorators';
 import { UserDetailsView } from '@views/user-details/UserDetailsView';
 import { Navigation } from '@services/Navigation';
 import { Action } from './Action';
@@ -9,10 +9,8 @@ export class OpenUserDetailsView extends Action {
 
   @inject navigation: Navigation
 
-  @prop user: User;
-
-  exec(): void {
-    this.navigation.navigateToPage(UserDetailsView, this.user);
+  exec(user: User): void {
+    this.navigation.navigateToPage(UserDetailsView, {user});
   }
 
 }

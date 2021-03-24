@@ -1,8 +1,8 @@
-import { injectable, inject } from 'tabris-decorators';
+import { inject, shared } from 'tabris-decorators';
 import { Navigation } from './Navigation';
 import { LockView } from '@views/lock/LockView';
 
-@injectable
+@shared
 export class App {
 
   @inject navigation: Navigation

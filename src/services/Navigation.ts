@@ -1,18 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { NavigationView, contentView, LayoutData } from 'tabris';
-import { create } from 'tabris-decorators';
-import { CustomPage } from '@views/shared/CustomPage';
-import { Screen } from '@views/shared/Screen';
-import { colors } from '@resources';
+import { Constructor, LayoutData, NavigationView, contentView } from 'tabris';
 import { shared } from 'tabris-decorators';
+import { CustomPage, PageArgs } from '@views/shared/CustomPage';
+import { Screen, ScreenArgs } from '@views/shared/Screen';
+import { colors } from '@resources';
 
 @shared
 export class Navigation {
 
   private currentScreen: Screen = null;
 
-  private readonly pageNavigation = new NavigationView({
+  private readonly navigationView = new NavigationView({
     layoutData: LayoutData.stretch,
     toolbarColor: colors.primaryDark,
     titleTextColor: colors.white,
@@ -21,23 +18,16 @@ export class Navigation {
     background: colors.primary
   }).appendTo(contentView);
 
-  public navigateToScreen(Name: new (...args: any[]) => Screen, ...args: any[]): void {
-    const newScreen = create(Name, args);
+  public navigateToScreen<T extends Screen>(Name: Constructor<T>, args?: ScreenArgs<T>): void {
+    const newScreen = new Name(args);
     contentView.append(newScreen);
-    this.disposeCurrentScreen();
+    this.currentScreen?.dispose();
     this.currentScreen = newScreen;
   }
 
-  public navigateToPage(Name: new (...args: any[]) => CustomPage, ...args: any[]): void {
-    this.pageNavigation.append(create(Name, args));
-    this.disposeCurrentScreen();
-  }
-
-  private disposeCurrentScreen(): void {
-    if (this.currentScreen) {
-      this.currentScreen.dispose();
-      this.currentScreen = null;
-    }
+  public navigateToPage<T extends CustomPage>(Name: Constructor<T>, args?: PageArgs<T>): void {
+    this.navigationView.append(new Name(args));
+    this.currentScreen?.dispose();
   }
 
 }

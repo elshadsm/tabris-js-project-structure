@@ -1,5 +1,5 @@
 import { LayoutData } from 'tabris';
-import { bindAll, component, injectable, inject, ListView } from 'tabris-decorators';
+import { bindAll, component, inject, shared, ListView } from 'tabris-decorators';
 import { MainViewModel } from './MainViewModel';
 import { sizes, texts } from '@resources';
 import { CustomPage } from '@views/shared/CustomPage';
@@ -7,7 +7,7 @@ import { UserCell } from './UserCell';
 import { Message } from '@views/shared/elements';
 import { User } from '@models/User';
 
-@injectable({ shared: false })
+@shared
 @component
 export class MainView extends CustomPage {
 

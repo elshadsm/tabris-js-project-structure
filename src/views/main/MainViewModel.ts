@@ -1,19 +1,23 @@
-import { injectable, inject, property } from 'tabris-decorators';
+import { Injector, injectable, inject, property } from 'tabris-decorators';
 import { OpenUserDetailsView } from '@actions/OpenUserDetailsView';
 import { UserRepository } from '@repositories/UserRepository';
-import { ViewModel } from '@views/shared/ViewModel';
 import { texts } from '@resources';
 import { User } from '@models/User';
 
 @injectable
-export class MainViewModel extends ViewModel {
+export class MainViewModel {
 
+  @inject private injector: Injector;
   @inject userRepository: UserRepository;
 
   @property public message: string;
   @property public userList: User[];
 
-  public async init(): Promise<void> {
+  constructor() {
+    this.initUserList().catch(console.error);
+  }
+
+  public async initUserList(): Promise<void> {
     this.message = texts.loading;
     await this.userRepository.sync();
     const list = this.userRepository.get();
@@ -22,7 +26,7 @@ export class MainViewModel extends ViewModel {
   }
 
   public select(user: User): void {
-    this.dispatch(OpenUserDetailsView, { user });
+    this.injector.resolve(OpenUserDetailsView).exec(user);
   }
 
 }

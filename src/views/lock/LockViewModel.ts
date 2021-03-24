@@ -1,19 +1,20 @@
-import { injectable, property } from 'tabris-decorators';
+import { Injector, inject, injectable, property } from 'tabris-decorators';
 import { OpenMainView } from '@actions/OpenMainView';
-import { ViewModel } from '@views/shared/ViewModel';
 
 @injectable
-export class LockViewModel extends ViewModel {
+export class LockViewModel {
+
+  @inject private injector: Injector;
 
   @property public input: string;
 
-  public init(): void {
+  constructor() {
     this.input = 'test';
   }
 
   public login(): void {
     if (this.input === 'test') {
-      this.dispatch(OpenMainView);
+      this.injector.resolve(OpenMainView).exec();
     }
   }
 

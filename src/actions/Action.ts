@@ -2,7 +2,7 @@ import { CustomError } from '@models/CustomError';
 
 export abstract class Action {
 
-  abstract exec(): unknown;
+  abstract exec(args?: unknown): unknown;
 
   public set<T extends Partial<this>>(properties: T) {
     if (arguments.length === 0) {

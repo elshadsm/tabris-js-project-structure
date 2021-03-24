@@ -1,11 +1,11 @@
 import { Composite, LayoutData } from 'tabris';
-import { component, injectable, inject, bindAll } from 'tabris-decorators';
+import { component, inject, shared, bindAll } from 'tabris-decorators';
 import { Label, PrimaryButton, TextField } from '@views/shared/elements';
 import { colors, sizes, texts } from '@resources';
 import { LockViewModel } from './LockViewModel';
 import { Screen } from '@views/shared/Screen';
 
-@injectable({ shared: false })
+@shared
 @component
 export class LockView extends Screen {
 

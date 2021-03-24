@@ -1,22 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { Page, Attributes } from 'tabris';
+import { Page, Properties } from 'tabris';
 import { colors } from '@resources';
 
+/**
+ * A container representing a single page of a NavigationView component.
+ */
 export abstract class CustomPage extends Page {
 
-  readonly model: {
-    init?: () => unknown,
-    dispose?: () => unknown
-  };
-
-  constructor(attributes?: Attributes<CustomPage>) {
+  constructor(properties?: Properties<CustomPage>) {
     super({
       background: colors.background,
-      ...attributes
+      ...properties
     });
   }
 
 }
 
-export type PageArgs = any[];
+export type PageArgs<T extends CustomPage> = Partial<Properties<T>>;
