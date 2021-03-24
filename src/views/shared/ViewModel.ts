@@ -21,7 +21,7 @@ export abstract class ViewModel {
   ): SubAction {
     const instance = Injector.get(this).resolve(constructor);
     if (properties) {
-      Object.assign(instance, properties);
+      instance.set(properties);
     }
     instance.exec();
     return instance;

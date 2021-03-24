@@ -16,7 +16,7 @@ export function arrayToString<T extends Model>(array: T[]): string {
   }
   let string = '[';
   array.forEach((item, index) => {
-    string += JSON.stringify(item.toJSON());
+    string += item.toString();
     if (index !== (array.length - 1)) {
       string += ',';
     }

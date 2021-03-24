@@ -1,12 +1,11 @@
-import { injectable, prop } from 'tabris-decorators';
 import { JSONObject, Model } from '.';
+import { nullable } from '@common/decorators';
 
-@injectable
 export class CustomError extends Error implements Model {
 
-  @prop({ nullable: true }) public type: string;
-  @prop({ nullable: true }) public url: string;
-  @prop({ nullable: true }) public cause: string;
+  @nullable public type: string;
+  @nullable public url: string;
+  @nullable public cause: string;
 
   constructor(data: Partial<CustomError>) {
     super();
@@ -19,11 +18,7 @@ export class CustomError extends Error implements Model {
   }
 
   toString(): string {
-    return `* CustomError: { 
-      message: ${this.message}
-      type: ${this.type}
-      cause: ${this.cause}
-   }`;
+    return JSON.stringify(this.toJSON());
   }
 
 }

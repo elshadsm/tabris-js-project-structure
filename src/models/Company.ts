@@ -1,12 +1,11 @@
-import { injectable, prop } from 'tabris-decorators';
 import { JSONObject, Model, ModelValues } from '.';
+import { nullable } from '@common/decorators';
 
-@injectable
 export class Company implements Model {
 
-  @prop({ nullable: true }) public name: string;
-  @prop({ nullable: true }) public catchPhrase: string;
-  @prop({ nullable: true }) public bs: string;
+  @nullable public name: string;
+  @nullable public catchPhrase: string;
+  @nullable public bs: string;
 
   constructor(data: ModelValues<Company>) {
     Object.assign(this, data);
@@ -18,11 +17,7 @@ export class Company implements Model {
   }
 
   toString(): string {
-    return `* Company: { 
-      name: ${this.name}
-      catchPhrase: ${this.catchPhrase}
-      bs: ${this.bs}
-   }`;
+    return JSON.stringify(this.toJSON());
   }
 
 }

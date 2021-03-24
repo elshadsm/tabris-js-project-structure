@@ -1,11 +1,10 @@
-import { injectable, prop } from 'tabris-decorators';
 import { JSONObject, Model, ModelValues } from '.';
+import { nullable } from '@common/decorators';
 
-@injectable
 export class Geo implements Model {
 
-  @prop({ nullable: true }) public lat: string;
-  @prop({ nullable: true }) public lng: string;
+  @nullable public lat: string;
+  @nullable public lng: string;
 
   constructor(data: ModelValues<Geo>) {
     Object.assign(this, data);
@@ -17,10 +16,7 @@ export class Geo implements Model {
   }
 
   toString(): string {
-    return `* Geo: { 
-      lat: ${this.lat}
-      lng: ${this.lng}
-   }`;
+    return JSON.stringify(this.toJSON());
   }
 
 }
