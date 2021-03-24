@@ -10,7 +10,7 @@ export class OpenUserDetailsView extends Action {
   @inject navigation: Navigation
 
   exec(user: User): void {
-    this.navigation.navigateToPage(UserDetailsView, {user});
+    this.navigation.navigateToPage(UserDetailsView, { user });
   }
 
 }

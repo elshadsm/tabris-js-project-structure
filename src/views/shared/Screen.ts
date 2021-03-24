@@ -16,5 +16,3 @@ export abstract class Screen extends Composite {
   }
 
 }
-
-export type ScreenArgs<T extends Screen> = Partial<Properties<T>>;

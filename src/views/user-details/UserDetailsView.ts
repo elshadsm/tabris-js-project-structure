@@ -21,7 +21,7 @@ export class UserDetailsView extends CustomPage {
       ScrollView({
         layoutData: LayoutData.stretch,
         children: [
-          ...this.createInfoUi(this.user),
+          ...this.createInfoSection(this.user),
           Separator({
             left: sizes.spacing,
             top: [LayoutData.prev, sizes.spacing],
@@ -34,7 +34,7 @@ export class UserDetailsView extends CustomPage {
             label: texts.address,
             info: ''
           }),
-          ...this.createInfoUi(this.user.address),
+          ...this.createInfoSection(this.user.address),
           Separator({
             left: sizes.spacing,
             top: [LayoutData.prev, sizes.spacing],
@@ -47,7 +47,7 @@ export class UserDetailsView extends CustomPage {
             label: texts.geo,
             info: ''
           }),
-          ...this.createInfoUi(this.user.address.geo),
+          ...this.createInfoSection(this.user.address.geo),
           Separator({
             left: sizes.spacing,
             top: [LayoutData.prev, sizes.spacing],
@@ -60,13 +60,13 @@ export class UserDetailsView extends CustomPage {
             label: texts.company,
             info: ''
           }),
-          ...this.createInfoUi(this.user.company)
+          ...this.createInfoSection(this.user.company)
         ]
       })
     );
   }
 
-  private createInfoUi(model: Model): Widget[] {
+  private createInfoSection(model: Model): Widget[] {
     const list: Widget[] = [];
     for (const propertyName in model) {
       const key = propertyName as keyof Model;
