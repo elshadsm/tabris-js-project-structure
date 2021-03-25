@@ -1,4 +1,4 @@
-import { Attributes, Button, Composite, TextInput, TextView } from 'tabris';
+import { Attributes, Button, Composite, LayoutData, TextInput, TextView } from 'tabris';
 import { colors, fonts, sizes } from '@resources';
 
 export const PrimaryButton = ({ ...attr }: Attributes<Button>): Button =>
@@ -41,5 +41,12 @@ export const Separator = (attr: Attributes<Composite>): Composite =>
   Composite({
     height: sizes.separatorHeight,
     background: colors.gray,
+    ...attr
+  }, Separator);
+
+export const EmptyView = (attr: Attributes<Composite>): Composite =>
+  Composite({
+    layoutData: LayoutData.stretchX,
+    height: sizes.spacing,
     ...attr
   }, Separator);

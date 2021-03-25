@@ -5,7 +5,7 @@ import { Action } from './Action';
 import { User } from '@models/User';
 
 @injectable
-export class OpenUserDetailsView extends Action {
+export class OpenUserDetailsView implements Action {
 
   @inject navigation: Navigation
 

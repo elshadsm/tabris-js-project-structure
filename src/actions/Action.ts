@@ -1,6 +1,6 @@
 
-export abstract class Action {
+export interface Action {
 
-  abstract exec(arg1?: unknown, arg2?: unknown, arg3?: unknown, ...remaining: unknown[]): unknown;
+  exec(arg1?: unknown, arg2?: unknown, arg3?: unknown, ...remaining: unknown[]): unknown;
 
 }

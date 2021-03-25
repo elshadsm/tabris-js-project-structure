@@ -4,7 +4,7 @@ import { MainView } from '@views/main/MainView';
 import { Action } from './Action';
 
 @injectable
-export class OpenMainView extends Action {
+export class OpenMainView implements Action {
 
   @inject navigation: Navigation
 

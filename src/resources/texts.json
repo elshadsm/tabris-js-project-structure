@@ -25,6 +25,10 @@
     "en": "Next",
     "de": "Next"
   },
+  "user": {
+    "en": "User",
+    "de": "User"
+  },
   "address": {
     "en": "Address",
     "de": "Address"

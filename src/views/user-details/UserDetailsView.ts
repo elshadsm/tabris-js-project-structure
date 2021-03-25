@@ -1,8 +1,8 @@
 import { Composite, LayoutData, Properties, ScrollView, TextView, Widget } from 'tabris';
 import { bind, component, property, shared } from 'tabris-decorators';
 import { colors, fonts, sizes, texts } from '@resources';
+import { EmptyView, Separator } from '@views/shared/elements';
 import { CustomPage } from '@views/shared/CustomPage';
-import { Separator } from '@views/shared/elements';
 import { Model } from '@models/index';
 import { User } from '@models/User';
 
@@ -21,56 +21,44 @@ export class UserDetailsView extends CustomPage {
       ScrollView({
         layoutData: LayoutData.stretch,
         children: [
-          ...this.createInfoSection(this.user),
+          ...this.createInfoSection(texts.user, this.user),
           Separator({
             left: sizes.spacing,
             top: [LayoutData.prev, sizes.spacing],
             right: sizes.spacing
           }),
-          new InfoView({
-            left: sizes.spacing,
-            top: [LayoutData.prev, sizes.spacing],
-            right: sizes.spacing,
-            label: texts.address,
-            info: ''
-          }),
-          ...this.createInfoSection(this.user.address),
+          ...this.createInfoSection(texts.address, this.user.address),
           Separator({
             left: sizes.spacing,
             top: [LayoutData.prev, sizes.spacing],
             right: sizes.spacing
           }),
-          new InfoView({
-            left: sizes.spacing,
-            top: [LayoutData.prev, sizes.spacing],
-            right: sizes.spacing,
-            label: texts.geo,
-            info: ''
-          }),
-          ...this.createInfoSection(this.user.address.geo),
+          ...this.createInfoSection(texts.geo, this.user.address.geo),
           Separator({
             left: sizes.spacing,
             top: [LayoutData.prev, sizes.spacing],
             right: sizes.spacing
           }),
-          new InfoView({
-            left: sizes.spacing,
-            top: [LayoutData.prev, sizes.spacing],
-            right: sizes.spacing,
-            label: texts.company,
-            info: ''
-          }),
-          ...this.createInfoSection(this.user.company)
+          ...this.createInfoSection(texts.company, this.user.company),
+          EmptyView({ top: LayoutData.prev })
         ]
       })
     );
   }
 
-  private createInfoSection(model: Model): Widget[] {
-    const list: Widget[] = [];
-    for (const propertyName in model) {
+  private createInfoSection(label: string, info: Model): Widget[] {
+    const list: Widget[] = [
+      new TextView({
+        left: sizes.spacing,
+        top: [LayoutData.prev, sizes.spacing],
+        right: sizes.spacing,
+        text: label,
+        font: fonts.header,
+        textColor: colors.black
+      })];
+    for (const propertyName in info) {
       const key = propertyName as keyof Model;
-      const value = model[key];
+      const value = info[key];
       if (typeof value !== 'object') {
         list.push(
           new InfoView({

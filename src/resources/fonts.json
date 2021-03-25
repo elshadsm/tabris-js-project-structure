@@ -4,6 +4,12 @@
     "size": 18,
     "weight": "bold"
   },
+  "header": {
+    "size": 16,
+    "family": [
+      "open-sans-bold"
+    ]
+  },
   "label": {
     "size": 14,
     "family": [
