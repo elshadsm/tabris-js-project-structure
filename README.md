@@ -1,4 +1,4 @@
-# tabris-js-project-structure
+# Example Tabris.js project structure
 
 ## Run
 
