@@ -1,5 +1,7 @@
 # Example Tabris.js project structure
 
+The project specifies the folder structure that works best for me. The structure is a recommendation and you are welcome to update it for your own use case.
+
 ## Run
 
 If you haven't done so already, install the [Tabris CLI](https://www.npmjs.com/package/tabris-cli) on your machine:
